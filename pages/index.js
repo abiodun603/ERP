@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-
+import 'semantic-ui-css/semantic.min.css'
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
 export default function Home() {
   return (
     <div className={styles.container}>
