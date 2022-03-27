@@ -1,37 +1,54 @@
-import Document, {Html, Head, Main, NextScript } from 'next/document';
-// Import styled components ServerStyleSheet
-import { ServerStyleSheet } from 'styled-components';
+import React from 'react';
+import Document, { Head, Main, NextScript } from 'next/document';
+import { ServerStyleSheet } from 'styled-components'
+import { ServerStyleSheets } from '@material-ui/styles';
 
 export default class MyDocument extends Document {
-  static getInitialProps({ renderPage }) {
-    // Step 1: Create an instance of ServerStyleSheet
-    const sheet = new ServerStyleSheet();
+  static async getInitialProps (ctx) {
+    const styledComponentsSheet = new ServerStyleSheet()
+    const materialSheets = new ServerStyleSheets()
+    const originalRenderPage = ctx.renderPage;
 
-    // Step 2: Retrieve styles from components in the page
-    const page = renderPage((App) => (props) =>
-      sheet.collectStyles(<App {...props} />),
-    );
-
-    // Step 3: Extract the styles as <style> tags
-    const styleTags = sheet.getStyleElement();
-
-    // Step 4: Pass styleTags as a prop
-    return { ...page, styleTags };
+    try {
+        ctx.renderPage = () => originalRenderPage({
+            enhanceApp: App => props => styledComponentsSheet.collectStyles(materialSheets.collect(<App {...props} />))
+          })
+        const initialProps = await Document.getInitialProps(ctx)
+        return {
+          ...initialProps,
+          styles: (
+            <React.Fragment>
+              {initialProps.styles}
+              {materialSheets.getStyleElement()}
+              {styledComponentsSheet.getStyleElement()}
+            </React.Fragment>
+          )
+        }
+      } finally {
+        styledComponentsSheet.seal()
+      }
   }
 
   render() {
     return (
-      <Html>
+      <html lang="en" dir="ltr">
         <Head>
-          {/* <title>My page</title> */}
-          {/* Step 5: Output the styles in the head  */}
-          {this.props.styleTags}
+          <meta charSet="utf-8" />
+          {/* Use minimum-scale=1 to enable GPU rasterization */}
+          <meta
+            name="viewport"
+            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+          />
+          {/* PWA primary color */}
+          <meta
+            name="theme-color"
+            // content={theme.palette.primary.main}
+          />
         </Head>
         <body>
           <Main />
           <NextScript />
         </body>
-      </Html>
+      </html>
     );
-  }
-}
+  }}

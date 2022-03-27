@@ -1,9 +1,6 @@
 import React from "react";
 import { AuthContainer, CredentialBox, ImageBox } from "../styles/layout.style";
 import {RiHeartAddFill} from "react-icons/ri"
-import Link from "next/link";
-import { COLORS, SIZES } from "../assets/theme/theme";
-import {FaEnvelope} from "react-icons/fa"
 import { Button } from "../styles/widget.style";
 
 const AuthConfirm = ({children, ...props }) => (
@@ -35,37 +32,37 @@ const AuthConfirm = ({children, ...props }) => (
 				{
 					props.button && 
 						<Button
-						bg = "#34C38F"
-						border = {`1px solid #34c38f`}
-						width = {"127"}
-						style= {{
-							marginTop: 10
-						}}
-						>Back to Sign in
-					</Button>
+							bg = "#34C38F"
+							border = {`1px solid #34c38f`}
+							width = {"127"}
+							style= {{
+								marginTop: 10
+							}}
+							>Back to Sign in
+						</Button>
 				}
 					
 				{/* link */}
 					{
-						props.signin && 
-						<div style={{display: "flex", alignItems: "center", justifyContent: "center", marginTop: 60}}>
-							<p style = {{color: COLORS.kblackCom, fontSize: SIZES.body4, fontWeight: "normal"}}>Didn&apos;t recieve an email ? </p>
-							<Link 
-								href="/"  
-							>
-								<a
-								style = {
-										{
-										color: COLORS.kprimary,
-										fontSize: SIZES.body4,
-										fontWeight: "400",
-										marginLeft: 10
-										}
-								}
-								>Sign in here
-								</a>
-							</Link>
-						</div>
+						// props.signin && 
+						// <div style={{display: "flex", alignItems: "center", justifyContent: "center", marginTop: 6~0}}>
+						// 	<p style = {{color: COLORS.kblackCom, fontSize: SIZES.body4, fontWeight: "normal"}}>Didn&apos;t recieve an email ? </p>
+						// 	<Link 
+						// 		href="/"  
+						// 	>
+						// 		<a
+						// 		style = {
+						// 				{
+						// 				color: COLORS.kprimary,
+						// 				fontSize: SIZES.body4,
+						// 				fontWeight: "400",
+						// 				marginLeft: 10
+						// 				}
+						// 		}
+						// 		>Sign in here
+						// 		</a>
+						// 	</Link>
+						// </div>
 					}
 				
 			{/* </div> */}
