@@ -68,7 +68,8 @@ export const CredentialBox = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2em;
-  width: 100%;
+  width: 450px;
+  box-shadow: 0px 10px 20px rgba(18, 38, 63, 0.0313726);
 
   .credentialHeader{
     display: flex !important;

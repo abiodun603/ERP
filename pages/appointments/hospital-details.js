@@ -1,19 +1,39 @@
+import { Backdrop, CircularProgress } from '@mui/material';
 import React, {useState} from 'react'
 import { BiChat } from 'react-icons/bi';
+import { HospitalConfirm } from '../../components/AuthConfirm';
 import Button from '../../components/shared/button';
 import Card from '../../components/shared/card';
 import ScrollTextArea from '../../components/shared/scrollTextarea/scrollTextarea'
-
+import {FaCheck} from "react-icons/fa"
 const DetailsCard = () => {
     const [startDate, setStartDate] = useState(new Date());
-
+    const [open, setOpen] =  useState(false);
+    const handleClose = () => {
+      setOpen(false);
+    };
+    const handleToggle = () => {
+      setOpen(!open);
+    };
    return (
        <div className='w-fit  flex-column' style={{margin:"3rem auto 0 auto"}}>
            <div className='flex justify-between items-center'>
                {/* date */}
                <p className='font-normal text-sm text-blackCom'>August 01 2021</p>
                 <div className='flex'>
-                    <Button buttonSize="btn--xl--primary">Approve</Button>
+                    <Button buttonSize="btn--xl--primary" onClick={handleToggle}>Approve</Button>
+                    <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open={open}
+                        onClick={handleClose}
+                        >
+                            <HospitalConfirm
+                                title = "Success !"
+                                discription = "You have approoved James Kingsley appointemt at Abu Teaching Hospital"
+                                icon = {FaCheck}
+                                button = "View Appointment"
+                            />
+                    </Backdrop>
                     <span className='mr-3'></span>
                     <Button buttonStyle = "btn--danger--outline" buttonSize="btn--xl--primary">Decline</Button>
                 </div>
@@ -57,8 +77,8 @@ const DetailsCard = () => {
             </Card>
 
             <Card
-                name = "Abu Teaching Hospital"
-                desc = "5 Jibowu Crescent, Gra Ibadan"
+                name = "James Kingsley"
+                desc = "WebBank Limited"
             >
                 {/* view profile action */}
                 <div className='view_profile mt-7'>
