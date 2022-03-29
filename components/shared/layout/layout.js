@@ -6,6 +6,13 @@ import Topnav from '../../topnav/topnav'
 import { LayoutContent, LayoutContentMain, LayoutWrapper } from './style-layout'
 import UserHealthProvider from '../../../pages/users/healthproviders'
 import IndividualUser from '../../../pages/users/individual'
+import IndividualDetails from '../../../pages/users/individual-details'
+import HospitalAppointment from '../../../pages/appointments/hospital-appoint'
+import SubscriptionPayment from '../../../pages/payments/subs-payment'
+import ClaimsPayment from '../../../pages/payments/claims-payment'
+import Profile from '../../../pages/account-setting/profile'
+import PaymentPend from '../../../pages/users/payment-pending'
+import HospitalDetails from '../../../pages/appointments/hospital-details'
 const Layout = () => {
   return (
     <>
@@ -17,7 +24,14 @@ const Layout = () => {
               {/* <Dashboard/> */}
               {/* <HealthProvider/> */}
               {/* <UserHealthProvider/> */}
-              <IndividualUser/>
+              {/* <IndividualUser/> */}
+              {/* <IndividualDetails/> */}
+              {/* <HospitalAppointment/> */}
+              {/* <SubscriptionPayment/> */}
+              {/* <ClaimsPayment/> */}
+              {/* <Profile/> */}
+              {/* <PaymentPend/> */}
+              <HospitalDetails/>
             </LayoutContentMain>
           </LayoutContent>
         </LayoutWrapper>

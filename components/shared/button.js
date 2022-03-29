@@ -6,10 +6,10 @@ const STYLES = [
     "btn--primary--outline",
     "btn--grey--solid",
     "btn--danger--solid",
-    
+    "btn--danger--outline"
 ];
 
-const SIZES = ["btn--medium", "btn--small", "btn--large", "btn--table"];
+const SIZES = ["btn--medium", "btn--small", "btn--large", "btn--table", "btn--xl--primary"];
 
 
 function Button({children, type, onClick, buttonStyle, buttonSize}) {

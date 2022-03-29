@@ -18,3 +18,8 @@
 .badge-success {
     background-color: #34C38F;
 }
+
+.badge-danger {
+    background-color: rgba(244, 106, 106, 0.180392);
+    color: #F46A6A;
+}

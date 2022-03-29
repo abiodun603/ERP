@@ -59,7 +59,13 @@
     border: 1px solid #FFFFFF;
     color: #FFFFFF;
     display: none;
-}   
+} 
+
+.btn--danger--outline{
+    background-color: transparent;
+    border: 1px solid #FF5E65;
+    color: #FF5E65;
+} 
 
 /* Button Sizes */
 .btn--large{
@@ -89,4 +95,8 @@
     height: 24px;
     font-size: 11px !important;
     font-weight: 400;
+}
+
+.btn--xl--primary {
+    padding: 0 1.5rem;
 }

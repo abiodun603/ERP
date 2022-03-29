@@ -19,6 +19,7 @@ export const COLORS = {
     kdanger: "#E72E1E",
     ksmallbutton: "#EAEAEA",
     kbackGray2: "#44444F",
+    kgreen: "#34c38f",
     kbackground: "#F8F8FB"
 }
 
@@ -40,6 +41,7 @@ export const SIZES = {
     body3: "16px",
     body4: "15px",
     body5: "13px",
+    body6: "14px",
     height: "24px",
     sidebar: "18.75rem"
 }
