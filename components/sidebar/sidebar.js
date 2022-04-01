@@ -3,14 +3,15 @@ import { RiHeartAddFill } from 'react-icons/ri'
 import { SidebarWrapper } from './style-sidebar'
 import { SidebarNav } from './sidebarNav'
 // import {CSidebarNav} from "@coreui/react"
-import { navigation } from '../../utils/ui-data'
+import { MENU_ITEMS, navigation } from '../../utils/ui-data'
+import MenuItemsList from '../MenuItemsList'
 
 export const Sidebar = ({children}) => {
   return (
     <>
         <SidebarWrapper>
             {/* HMO LOGO */}
-            <div className = "hmo_logo">
+            <div className = "hmo_logo mb-9">
                 {/* icon */}
                 <RiHeartAddFill className="hmo_logo-Icon"/>
                 {/* description */}
@@ -19,7 +20,7 @@ export const Sidebar = ({children}) => {
 
             {/* Profile Listing */}
             {/* <CSidebarNav style={{listStyle: "none"}}> */}
-              {/* <SidebarNav items={navigation} /> */}
+            <MenuItemsList options={MENU_ITEMS} />            
             {/* </CSidebarNav> */}
 
         </SidebarWrapper>

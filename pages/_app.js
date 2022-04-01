@@ -2,19 +2,16 @@ import Layout from '../components/shared/layout/layout'
 import '../styles/globals.css'
 import "../styles/button.style.css"
 import "../components/shared/badge/badge.css"
-// import "react-datepicker/dist/react-datepicker.css";
-// import "../components/shared/badge/badge.css"
-// import 'tw-elements';
-// import "@fortawesome/fontawesome-free/css/all.min.css";
-// import 'bootstrap-css-only/css/bootstrap.min.css';
-// import 'mdbreact/dist/css/mdb.css';
-
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps }) {
+  <Head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </Head>
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
   ) 
 }
 

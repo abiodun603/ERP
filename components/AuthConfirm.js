@@ -92,7 +92,7 @@ export const HospitalConfirm = ({children, ...props }) => {
 				{/* title */}
 					<h3>{props.title}</h3>
 				{/* discription */}
-					<p className="text-center mt-1">
+					<p className="text-center text-normal text-ksecondary text-sm mt-1">
 						{props.discription}
 					</p>
 				{/* Button */}

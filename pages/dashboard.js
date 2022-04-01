@@ -94,7 +94,7 @@ const Card = ({user, number, dollar}) => {   // ? :
                             } 
                         </h2>
                         {/* arrow up */}
-                        <MdKeyboardArrowUp  className='text-green text-base font-bold'/>
+                        <MdKeyboardArrowUp  className='text-green text-2xl font-bold'/>
                     </div>
                 </div>
 

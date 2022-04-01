@@ -107,8 +107,9 @@ const renderbody = (item, index) => (
         </td>
     </tr>
 )
- // status color
- const claimStatus = {
+
+// status color
+const claimStatus = {
     "Declined" : "danger",
     "Posted": "success",
     "Pending" : "pending"
@@ -158,7 +159,7 @@ const Dash = () => {
         <>
             {/* Card Header */}
             <div className='flex justify-between items-center mb-6'>
-                <h2 className='font-semibold text-base text-kblackCom'>Subscription Payment</h2>
+                <h2 className='font-semibold text-base text-kblackCom'>Claims Payment</h2>
                 <div className = "flex items-center">
                     <div className="w-50 md:w-1/9 mb-6 md:mb-0 mr-2">
                         <div className="relative">

@@ -70,12 +70,6 @@ const Dash = () => {
                 <Card user="Total Hospital Visits" dollar number="532,452"/>
                 <Card user="Total Telemedicine" number="1,452"/>
             </div>
-
-            {/*  Lastest Activites */}
-            {/* <div className='w-full min-h-full bg-white rounded mt-9 pl-5 pt-3 '>
-                <h3 className='text-base font-semibold mt-3 mb-4'>Lastest Activities</h3>
-                <TabTable/>
-            </div> */}
         </>
     )
 }

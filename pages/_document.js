@@ -42,7 +42,6 @@ export default class MyDocument extends Document {
           {/* PWA primary color */}
           <meta
             name="theme-color"
-            // content={theme.palette.primary.main}
           />
         </Head>
         <body>

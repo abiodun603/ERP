@@ -162,15 +162,15 @@ const Filter = () => {
     return (
         <>
             <div className="flex flex-row w-full mt-8 mb-6">
-                <div className="basis-1/2 rounded-l">
+                <div className="basis-1/2  h-14 rounded-l">
                     <div className=' h-full w-full relative rounded-l'>
                         <input type="text" placeholder = "Search Keyword" className='h-full w-full pl-14 font-light text-sm focus:outline-none rounded-l' />
-                        <BiSearchAlt className='topnav_search absolute top-6 left-7 text-iconblue'/>
+                        <BiSearchAlt className='topnav_search absolute top-5 left-7 text-iconblue'/>
                     </div>
                 </div>
-                <div className="basis-1/3 h-16 flex items-center justify-center">
+                <div className="basis-1/3 h-14 flex items-center justify-center">
                 <div className="relative w-full">
-                    <select className="block appearance-none w-full h-16 text-gray-700 py-3 pl-6 text-blacktwo pr-8 leading-tight bg-white focus:outline-none focus:bg-white border-0 text-sm" id="grid-state">
+                    <select className="block appearance-none w-full h-14 text-gray-700 py-3 pl-6 text-blacktwo pr-8 leading-tight bg-white focus:outline-none focus:bg-white border-0 text-sm" id="grid-state">
                     <option>Select Location</option>
                     <option>Missouri</option>
                     <option>Texas</option>
@@ -180,7 +180,7 @@ const Filter = () => {
                     </div>
                 </div>
                 </div>
-                <div className="relative basis-1/3 bg-white flex items-center ">
+                <div className="relative basis-1/3 bg-white flex h-14 items-center ">
                     {/* <MdDateRange/> */}
                     <div className="pointer-events-none absolute inset-y-0 left-0 top-0.2 flex items-center pr-6 text-gray-700">
                         <MdDateRange className='text-iconblue'/>
@@ -188,7 +188,7 @@ const Filter = () => {
                     <p className='text-sm pl-6 '>Select Date</p>
                     {/* <ReactDatePicker placeholder="mm/dd" selected={startDate} onChange={(date) => setStartDate(date)} /> */}
                 </div>
-                <div className="basis-1/4 bg-primary seacch h-16 flex items-center justify-center rounded-r"><button className='h-full text-white w-full rounded-r-lg'>Search</button></div>
+                <div className="basis-1/4  bg-primary seacch h-14 flex items-center justify-center rounded-r"><button className='h-full text-white w-full rounded-r-lg'>Search</button></div>
             </div>
         </>
     );
@@ -201,7 +201,7 @@ const Dash = () => {
         <>
             {/* Card Header */}
             <div className='flex justify-between items-center mb-6'>
-                <h2 className='font-semibold text-base'>DASHBOARD</h2>
+                <h2 className='font-semibold text-base'>Healthcare Provider Claims</h2>
                 <div className="w-50 md:w-1/8 mb-6 md:mb-0">
                     <div className="relative">
                         <select className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 font-normal" style={{fontSize: SIZES.body5}}  id="grid-state">
