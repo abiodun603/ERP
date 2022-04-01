@@ -21,7 +21,7 @@ import { MenuItemContainer } from "./styles";
       <MenuItemContainer className={selected ? "selected" : ""} depth={depth} >
         <Link href={url} passHref className="block">
           <div className="menu-item">
-            {Icon ? <Icon /> : ""}
+            {Icon ? <Icon className="text-xl"/> : ""}
             <span className="">{name}</span>
           </div>
         </Link>

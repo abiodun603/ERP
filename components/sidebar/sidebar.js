@@ -11,7 +11,7 @@ export const Sidebar = ({children}) => {
     <>
         <SidebarWrapper>
             {/* HMO LOGO */}
-            <div className = "hmo_logo mb-9">
+            <div className = "hmo_logo mb-12">
                 {/* icon */}
                 <RiHeartAddFill className="hmo_logo-Icon"/>
                 {/* description */}
