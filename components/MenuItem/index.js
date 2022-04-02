@@ -19,12 +19,23 @@ import { MenuItemContainer } from "./styles";
   return (
     <div className="">
       <MenuItemContainer className={selected ? "selected" : ""} depth={depth} >
-        <Link href={url} passHref className="block">
-          <div className="menu-item">
-            {Icon ? <Icon className="text-xl"/> : ""}
-            <span className="">{name}</span>
-          </div>
-        </Link>
+        {
+            url ?  
+            <Link href={url} passHref className="block">
+                <div className="menu-item">
+                {Icon ? <Icon className="text-xl text-[#6A7187] "/> : ""}
+                <span className="">{name}</span>
+                </div>
+            </Link>
+
+            :
+
+            <div className="menu-item">
+                {Icon ? <Icon className="text-xl "/> : ""}
+                <span className="text-[#6A7187] hover:opacity-100 -ml-1">{name}</span>
+            </div>
+
+        }
         {isNested ? (
           <ExpandIcon isExpanded={isExpanded} handleClick={onClick} />
         ) : null}

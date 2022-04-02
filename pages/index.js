@@ -1,4 +1,5 @@
 import Dashboard from './dashboard'
+import Head from 'next/head'
 
 const Home = () =>  {
   return (

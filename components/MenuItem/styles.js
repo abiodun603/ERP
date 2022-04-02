@@ -6,7 +6,7 @@ export const MenuItemContainer = styled.a
   display: flex;
   flex-direction: row;
   font-size: 15px;
-  padding: 12px 0px 12px 30px;
+  padding: 10px 30px 10px 30px;
   align-items: center;
   justify-content: space-between;
   color: #A6B0CF;
