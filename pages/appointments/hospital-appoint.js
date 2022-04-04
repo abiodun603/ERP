@@ -3,11 +3,12 @@ import Button from '../../components/shared/button'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { SIZES } from '../../assets/theme/theme';
 import Badge from '../../components/shared/badge/badge';
-import { Tooltip } from '@mui/material';
+import { Box, Tab, Tabs, Tooltip } from '@mui/material';
 import { BiSearchAlt } from 'react-icons/bi';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { MdDateRange } from 'react-icons/md';
 import Table from '../../components/shared/table/table';
+import { useRouter } from 'next/router';
 
 
 /** Fake Table Api **/
@@ -34,7 +35,7 @@ const claimsTable = {
             date: "12/11/2021",
             provider: "Abu Teaching Hosiptal",
             solution: "OPD",
-            status: "Posted"
+            status: "Declined"
         },
         {
             claim: "23804720",
@@ -48,7 +49,7 @@ const claimsTable = {
             date: "12/11/2021",
             provider: "Abu Teaching Hosiptal",
             solution: "OPD",
-            status: "Rejected"
+            status: "Declined"
         },
         {
             claim: "23804720",
@@ -80,41 +81,45 @@ const claimsTable = {
         }
     ]
 }
-// index below should be change to id
-const renderHead = (item, index) => <th key = {index}>{item}</th>
-const renderbody = (item, index) => (
-    <tr key = {index} className = "">
-        <td className = "">{item.claim}</td>
-        <td className = "">{item.date}</td>
-        <td className = "">{item.provider}</td>
-        <td className = "">{item.solution}</td>
-        <td className = "">
-            <span className='cursor-pointer'>
-                <Badge
-                    type = {claimStatus[item.status]}
-                    content = {item.status}
-                />
-            </span>
-        </td>
-        <td>
-            <div className='flex items-center '>
-                <Button buttonSize="btn--table">View Details</Button>
-                <Tooltip title="Report claim">
-                    <span  style={{backgroundColor: "#EAEAEA", height: 24, width: 24}} className='ml-2 flex items-center justify-center rounded'>
-                        <MoreVertIcon  style={{fontSize: 17}}/>
-                    </span>
-                </Tooltip>
-            </div>
-        </td>
-    </tr>
-)
- // status color
- const claimStatus = {
-    "Rejected" : "fail",
+
+// status color
+const claimStatus = {
+    "Declined" : "danger",
     "Posted": "success",
     "Pending" : "pending"
 }
+// index below should be change to id
+const renderHead = (item, index) => <th key = {index}>{item}</th>
+const Renderbody = (item, index) => {
+    const router = useRouter();
 
+    return(
+        <tr key = {index} className = "">
+            <td className = "">{item.claim}</td>
+            <td className = "">{item.date}</td>
+            <td className = "">{item.provider}</td>
+            <td className = "">{item.solution}</td>
+            <td className = "">
+                <span className='cursor-pointer'>
+                    <Badge
+                        type = {claimStatus[item.status]}
+                        content = {item.status}
+                    />
+                </span>
+            </td>
+            <td>
+                <div className='flex items-center '>
+                    <Button buttonSize="btn--table" onClick={() => router.push('/appointments/hospital-details')}>View Details</Button>
+                    <Tooltip title="Report claim">
+                        <span  style={{backgroundColor: "#EAEAEA", height: 24, width: 24}} className='ml-2 flex items-center justify-center rounded'>
+                            <MoreVertIcon  style={{fontSize: 17}}/>
+                        </span>
+                    </Tooltip>
+                </div>
+            </td>
+        </tr>
+)}
+ 
 /**======== HEALTHPROVIDER FILTER COMPONENT ========== * */
 const Filter = () => {
     const [startDate, setStartDate] = useState(new Date());
@@ -186,7 +191,7 @@ const Dash = () => {
                 headData = {claimsTable.head}
                 renderHead = {(item, index) => renderHead(item, index)}
                 bodyData = {claimsTable.body}
-                renderBody = {(item, index) => renderbody(item, index)}
+                renderBody = {(item, index) => Renderbody(item, index)}
             /> 
         </>
     )

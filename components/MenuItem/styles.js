@@ -1,8 +1,6 @@
-import { number } from "prop-types";
 import styled from "styled-components";
 
-export const MenuItemContainer = styled.a 
-  `
+export const MenuItemContainer = styled.a `
   display: flex;
   flex-direction: row;
   font-size: 15px;

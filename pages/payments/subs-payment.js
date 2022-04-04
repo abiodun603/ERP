@@ -109,7 +109,7 @@ const renderbody = (item, index) => (
 )
  // status color
  const claimStatus = {
-    "Deactivated" : "fail",
+    "Deactivated" : "danger",
     "Active": "success",
     "Pending" : "pending"
 }
@@ -190,6 +190,7 @@ const Dash = () => {
         </>
     )
 }
+
 
 const SubscriptionPayment = () => {
   return (

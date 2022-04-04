@@ -12,11 +12,13 @@
 }
 
 .badge-pending {
-    background-color: #FBB129;
+    background: rgba(241, 180, 76, 0.180392);
+    color: #F1B44C;
 }
 
 .badge-success {
-    background-color: #34C38F;
+    color: #34C38F;
+    background: rgba(52, 195, 143, 0.180392);
 }
 
 .badge-danger {

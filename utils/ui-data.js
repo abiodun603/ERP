@@ -53,7 +53,7 @@ const MENU_OPTIONS = [
         },
         {
             name: "Healthcare Providers",
-            url: "#",
+            url: "/users/provider-dash",
         },
         {
             name: "Indepentent Doctors",
@@ -86,37 +86,37 @@ const MENU_OPTIONS = [
         icon: BiCreditCard,
         url: "#",
         subItems: [
-        {
-            name: "Subscription Payment",
-            url: "/payments/subs-payment",
-        },
-        {
-            name: "Claims Payment",
-            url: "/payments/claims-payment",
-        },
-        {
-            name: "Escrow Payment",
-            url: "#",
-        },
-        {
-            name: "Manage Subscription",
-            url: "/",
-        },
+            {
+                name: "Subscription Payment",
+                url: "/payments/subs-payment",
+            },
+            {
+                name: "Claims Payment",
+                url: "/payments/claims-payment",
+            },
+            {
+                name: "Escrow Payment",
+                url: "#",
+            },
+            {
+                name: "Manage Subscription",
+                url: "/",
+            },
         ],
     },
     {
         name: "Appointments",
         icon: VscCalendar,
-        url: "#",
+        url: "/appointments/hospital-details",
         subItems: [
-        {
-            name: "Hospitals",
-            url: "/appointments/hospital-appoint",
-        },
-        {
-            name: "Telemedicine",
-            url: "/",
-        },
+            {
+                name: "Hopitals",
+                url: "/appointments/hospital-appoint",
+            },
+            {
+                name: "Telemedicine",
+                url: "#",
+            }
         ],
     },
     {

@@ -49,7 +49,7 @@ const claimsTable = {
             date: "12/11/2021",
             provider: "Abu Teaching Hosiptal",
             solution: "OPD",
-            status: "Rejected"
+            status: "Declined"
         },
         {
             claim: "23804720",
@@ -99,7 +99,7 @@ const renderbody = (item, index) => (
         </td>
         <td>
             <div className='flex items-center '>
-                <Button buttonSize="btn--table">View Details</Button>
+                <Button buttonSize="btn--table" onClick={() => router.push('/about')}>View Details</Button>
                 <Tooltip title="Report claim">
                     <span  style={{backgroundColor: "#EAEAEA", height: 24, width: 24}} className='ml-2 flex items-center justify-center rounded'>
                         <MoreVertIcon  style={{fontSize: 17}}/>
@@ -111,7 +111,7 @@ const renderbody = (item, index) => (
 )
  // status color
  const claimStatus = {
-    "Rejected" : "fail",
+    "Declined" : "danger",
     "Posted": "success",
     "Pending" : "pending"
 }

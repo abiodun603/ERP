@@ -16,7 +16,6 @@ export const TopNavWrapper = styled.div `
 
         .search{
             position: relative;
-            
             input[type="text"]{
                 background: #f3f3f9;
                 border: none;

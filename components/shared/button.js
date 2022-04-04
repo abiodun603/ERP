@@ -6,7 +6,8 @@ const STYLES = [
     "btn--primary--outline",
     "btn--grey--solid",
     "btn--danger--solid",
-    "btn--danger--outline"
+    "btn--danger--outline",
+    "btn--green--solid"
 ];
 
 const SIZES = ["btn--medium", "btn--small", "btn--large", "btn--table", "btn--xl--primary"];
