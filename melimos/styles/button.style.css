@@ -1,0 +1,96 @@
+.btn{
+    font-weight: 600 !important;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    text-transform: capitalize;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+.btn--white--outline{
+    background-color: #FFFFFF !important;
+    border-radius: 92px !important;    
+    color: #0051FF !important;
+    font-size: 14px;
+} 
+
+/* Button Colos and Styles */
+.btn--primary--solid{
+    background: linear-gradient(108.96deg, #0051FF 0%, #729EFC 88.62% );
+    box-shadow: -13px 10px 32px rgba(0, 81, 255, 0.3);
+    border-radius: 20px;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+
+.btn--primary--outline{
+    background: #4882FE;
+    opacity: 0.9;
+    border-radius: 92px;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+
+.btn--danger--solid{
+    background-color: #E72E1E;
+    color: white;
+    border: none;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+
+.btn--orange--solid{
+    background-color: var(--orange);
+    color: var(--white);
+    border: none;
+}
+.btn--orange--primary{
+    background-color: var(--orange);
+    color: var(--primary);
+    border: none;
+}
+
+
+
+.btn--danger--outline{
+    background-color: transparent;
+    border: 1px solid #FF5E65;
+    color: #FF5E65;
+} 
+
+/* Button Sizes */
+.btn--large{
+    width: 125px;
+    height: 40px;
+}
+
+.btn--medium{
+   height: 65px;
+   width: 220px;
+}
+
+.btn--small{
+    height: 47px;
+    width: 146px;
+}
+
+.btn--big{
+    font-size: 13px;
+    background-color: #556EE6;;
+    width: 102px;
+}
+
+.btn--table{
+    width: 84px;
+    height: 24px;
+    font-size: 11px !important;
+    font-weight: 400;
+}
+
+.btn--xl--primary {
+    padding: 0 1.5rem;
+}

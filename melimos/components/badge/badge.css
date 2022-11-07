@@ -1,0 +1,29 @@
+.badge{
+    height: 23px;
+    width: 23px;
+    border-radius: 50%;
+    background-color: red;
+    z-index: 100;
+    position: absolute;
+}
+
+.badge-error {
+  background-color: #EE174B;
+}
+
+.badge-purple {
+  color: #9E00FF;
+}
+
+.badge-blue {
+  color: #0051FF;
+}
+
+.badge-success {
+  color: #10BF81;
+}
+
+.badge-yellow {
+  background: rgba(241, 170, 11, 0.1);
+  color: #F1AA0B;
+}
