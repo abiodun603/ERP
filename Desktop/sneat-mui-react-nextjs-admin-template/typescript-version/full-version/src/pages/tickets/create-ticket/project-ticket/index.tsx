@@ -38,12 +38,13 @@ const FormLayoutsSeparator = () => {
   // ** States
   const [value, setValue] = useState<string>('')
   const [date, setDate] = useState<DateType>(null)
-  const [error, setError] = useState<boolean>(false)
-  const [helperText, setHelperText] = useState<string>('Choose wisely')
+
+  // const [error, setError] = useState<boolean>(false)
+  // const [helperText, setHelperText] = useState<string>('Choose wisely')
 
   const handleRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setError(false)
-    setHelperText(' ')
+    // setError(false)
+    // setHelperText(' ')
     setValue((event.target as HTMLInputElement).value)
   }
 
@@ -51,14 +52,14 @@ const FormLayoutsSeparator = () => {
     event.preventDefault()
 
     if (value === 'best') {
-      setError(false)
-      setHelperText('You got it!')
+      // setError(false)
+      // setHelperText('You got it!')
     } else if (value === 'worst') {
-      setError(true)
-      setHelperText('Sorry, wrong answer!')
+      // setError(true)
+      // setHelperText('Sorry, wrong answer!')
     } else {
-      setError(true)
-      setHelperText('Please select an option.')
+      // setError(true)
+      // setHelperText('Please select an option.')
     }
   }
 

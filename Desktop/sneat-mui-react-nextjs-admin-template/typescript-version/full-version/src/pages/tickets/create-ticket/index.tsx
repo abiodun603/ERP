@@ -112,7 +112,7 @@ const CreateTicket = () => {
             </Box>
           </StyledList>
           <StyledList sx={{ mt: 4 }}>
-            <Box href='/tickets/create-ticket/support-ticket' component={Link} onClick={e => e.preventDefault()}>
+            <Box href='/tickets/create-ticket/support-ticket' component={Link}>
               <ListItem
                 sx={{
                   justifyContent: 'space-between',

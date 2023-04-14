@@ -54,7 +54,7 @@ const TableHeader = (props: TableHeaderProps) => {
           />
         </Box>
         <Button sx={{ mb: 2 }} variant='contained' onClick={handleDialogToggle}>
-          Add Permission
+          Create Ticket
         </Button>
       </Box>
       <Dialog
