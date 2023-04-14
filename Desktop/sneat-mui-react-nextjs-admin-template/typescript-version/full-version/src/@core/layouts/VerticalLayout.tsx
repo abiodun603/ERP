@@ -19,7 +19,7 @@ import { LayoutProps } from 'src/@core/layouts/types'
 import AppBar from './components/vertical/appBar'
 import Customizer from 'src/@core/components/customizer'
 import Navigation from './components/vertical/navigation'
-import Footer from './components/shared-components/footer'
+
 import ScrollToTop from 'src/@core/components/scroll-to-top'
 
 // ** Util Import
@@ -59,7 +59,7 @@ const ContentWrapper = styled('main')(({ theme }) => ({
 
 const VerticalLayout = (props: LayoutProps) => {
   // ** Props
-  const { hidden, settings, children, scrollToTop, footerProps, contentHeightFixed, verticalLayoutProps } = props
+  const { hidden, settings, children, scrollToTop, contentHeightFixed, verticalLayoutProps } = props
 
   // ** Vars
   const { skin, appBar, navHidden, appBarBlur, contentWidth } = settings
@@ -89,8 +89,8 @@ const VerticalLayout = (props: LayoutProps) => {
             navMenuContent={verticalLayoutProps.navMenu.content}
             navMenuBranding={verticalLayoutProps.navMenu.branding}
             menuLockedIcon={verticalLayoutProps.navMenu.lockedIcon}
-            // verticalNavItems={verticalLayoutProps.navMenu.navItems}
-            // navMenuProps={verticalLayoutProps.navMenu.componentProps}
+            verticalNavItems={verticalLayoutProps.navMenu.navItems}
+            navMenuProps={verticalLayoutProps.navMenu.componentProps}
             menuUnlockedIcon={verticalLayoutProps.navMenu.unlockedIcon}
             afterNavMenuContent={verticalLayoutProps.navMenu.afterContent}
             beforeNavMenuContent={verticalLayoutProps.navMenu.beforeContent}
@@ -142,7 +142,6 @@ const VerticalLayout = (props: LayoutProps) => {
           </ContentWrapper>
 
           {/* Footer Component */}
-          <Footer footerStyles={footerProps?.sx} footerContent={footerProps?.content} {...props} />
         </MainContentWrapper>
       </VerticalLayoutWrapper>
 

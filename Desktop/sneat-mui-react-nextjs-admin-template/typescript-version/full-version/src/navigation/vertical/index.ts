@@ -42,6 +42,46 @@ const navigation = (): VerticalNavItemsType => {
       path: '/apps/calendar'
     },
     {
+      title: 'Ticket',
+      icon: 'bx:food-menu',
+      children: [
+        {
+          title: 'Create New Ticket',
+          path: '/tickets/create-ticket'
+        },
+        {
+          title: 'My Ticket',
+          path: '/tickets'
+        }
+      ]
+    },
+    {
+      title: 'Task',
+      icon: 'bx:food-menu',
+      children: [
+        {
+          title: 'Open Task',
+          path: '/apps/invoice/list'
+        },
+        {
+          title: 'Completed Task',
+          path: '/apps/invoice/preview'
+        },
+        {
+          title: 'Paused Task',
+          path: '/apps/invoice/edit'
+        },
+        {
+          title: 'Pause Task Request',
+          path: '/apps/invoice/add'
+        },
+        {
+          title: 'Rejected Task',
+          path: '/apps/invoice/add'
+        }
+      ]
+    },
+    {
       title: 'Invoice',
       icon: 'bx:food-menu',
       children: [

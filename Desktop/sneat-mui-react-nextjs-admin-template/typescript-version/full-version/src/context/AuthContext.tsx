@@ -48,6 +48,7 @@ const AuthProvider = ({ children }: Props) => {
         console.log(userData, storedToken)
 
         setLoading(false)
+        setUser(userData)
         console.log(user)
       } else {
         localStorage.removeItem('userData')
@@ -63,7 +64,7 @@ const AuthProvider = ({ children }: Props) => {
     }
 
     initAuth()
-  }, [router, user])
+  }, [])
 
   const handleLog = async (params: LoginParams, errorCallback?: ErrCallbackType) => {
     try {
