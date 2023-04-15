@@ -23,6 +23,7 @@ const StyledList = styled(List)<ListProps>(({ theme }) => ({
   padding: 0,
   '& .MuiListItem-root': {
     padding: theme.spacing(5),
+    height: 150,
     border: `1px solid ${theme.palette.divider}`,
     '&:first-of-type': {
       borderTopLeftRadius: 8,
@@ -64,7 +65,7 @@ const CreateTicket = () => {
             Select Ticket Type
           </Typography>
           <StyledList sx={{ mt: 4 }}>
-            <Box href='/tickets/create-ticket/help-desk' component={Link}>
+            <Box href='/tickets/create-ticket/help-desk' component={Link} sx={{ textDecoration: 'none' }}>
               <ListItem
                 sx={{
                   justifyContent: 'space-between',
@@ -73,7 +74,7 @@ const CreateTicket = () => {
                 }}
               >
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                  <Image src={Avatar1} alt='' style={{ width: 'auto', height: 'auto' }} />
+                  <Image src={Avatar1} alt='' width={100} height={100} />
                   <Box sx={{ marginLeft: 5 }}>
                     <Typography variant='body2' sx={{ fontWeight: 600 }}>
                       Helpdesk
@@ -88,7 +89,7 @@ const CreateTicket = () => {
             </Box>
           </StyledList>
           <StyledList sx={{ mt: 4 }}>
-            <Box href='/tickets/create-ticket/project-ticket' component={Link}>
+            <Box href='/tickets/create-ticket/project-ticket' component={Link} sx={{ textDecoration: 'none' }}>
               <ListItem
                 sx={{
                   justifyContent: 'space-between',
@@ -97,14 +98,12 @@ const CreateTicket = () => {
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                  <Image src={Avatar1} alt='' style={{ width: 'auto', height: 'auto' }} />
-                  <Box sx={{ marginLeft: 5 }}>
-                    <Typography variant='body2' sx={{ fontWeight: 600 }}>
+                  <Image src={Avatar1} alt='' width={100} height={100} />
+                  <Box sx={{ marginLeft: 5, color: 'text.secondary', textDecoration: 'none' }}>
+                    <Typography variant='body2' sx={{ fontWeight: 600, textDecoration: 'none' }}>
                       Project
                     </Typography>
-                    <Typography variant='body1' sx={{ fontWeight: 600 }}>
-                      For Fresh deployments and new projects
-                    </Typography>
+                    <Typography variant='body1'>For Fresh deployments and new projects</Typography>
                   </Box>
                 </div>
                 <Icon icon='bx:chevron-right' />
@@ -112,7 +111,7 @@ const CreateTicket = () => {
             </Box>
           </StyledList>
           <StyledList sx={{ mt: 4 }}>
-            <Box href='/tickets/create-ticket/support-ticket' component={Link}>
+            <Box href='/tickets/create-ticket/support-ticket' component={Link} sx={{ textDecoration: 'none' }}>
               <ListItem
                 sx={{
                   justifyContent: 'space-between',
@@ -121,7 +120,7 @@ const CreateTicket = () => {
                 }}
               >
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                  <Image src={Avatar1} alt='' style={{ width: 'auto', height: 'auto' }} />
+                  <Image src={Avatar1} alt='' width={100} height={100} />
                   <Box sx={{ marginLeft: 5 }}>
                     <Typography variant='body2' sx={{ fontWeight: 600 }}>
                       Support
