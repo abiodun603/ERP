@@ -4,6 +4,7 @@ import config from 'src/configs/config'
 import { HTTP_STATUS } from 'src/constants'
 
 interface MyData {
+  message: string
   data: any[]
 }
 
@@ -22,10 +23,10 @@ export const postAsyncHelpDesk = createAsyncThunk<
   {
     rejectValue: MyKnownError
   }
->('helpDesk/postAsyncThunk', async (userInfo, { rejectWithValue }) => {
-  const { url, token } = userInfo
+>('helpDesk/postAsyncThunk', async (formData, { rejectWithValue }) => {
+  const { url, token, ...data } = formData
   try {
-    const response = await axios.post(config.baseUrl + url, {
+    const response = await axios.post(config.baseUrl + url, data, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
@@ -38,10 +39,10 @@ export const postAsyncHelpDesk = createAsyncThunk<
     return response.data
   } catch (err: any) {
     console.log(err)
+    if (!err.response) {
+      throw err
+    }
 
-    // if (!err.response) {
-    //   throw err;
-    // }
     return rejectWithValue(err.response.data)
   }
 })

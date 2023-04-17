@@ -16,6 +16,36 @@ interface MyKnownError {
   errorMessage: string
 }
 
+export const fetchAsyncRoles = createAsyncThunk<
+  MyData,
+  { url: string } & Partial<UserAttributes>,
+  {
+    rejectValue: MyKnownError
+  }
+>('permissions/fetchAsyncThunk', async (userInfo, { rejectWithValue }) => {
+  const { url, token } = userInfo
+  try {
+    const response = await axios.get(config.baseUrl + url, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      validateStatus: () => {
+        return true
+      }
+    })
+
+    return response.data
+  } catch (err: any) {
+    console.log(err)
+    if (!err.response) {
+      throw err
+    }
+
+    return rejectWithValue(err.response.data)
+  }
+})
+
 export const postAsyncRoles = createAsyncThunk<
   MyData,
   { url: string } & Partial<UserAttributes>,

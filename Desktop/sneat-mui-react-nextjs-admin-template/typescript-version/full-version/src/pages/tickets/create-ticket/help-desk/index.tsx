@@ -26,7 +26,7 @@ import DatePicker from 'react-datepicker'
 // import { DateType } from 'src/types/forms/reactDatepickerTypes'
 
 // ** Third Party Imports
-// import * as yup from 'yup'
+import { toast } from 'react-hot-toast'
 import { useForm, Controller } from 'react-hook-form'
 
 // import { yupResolver } from '@hookform/resolvers/yup'
@@ -36,7 +36,6 @@ import { useAuth } from 'src/hooks/useAuth'
 import { AppDispatch } from 'src/store'
 import { useDispatch } from 'react-redux'
 import { postAsyncHelpDesk } from 'src/store/apps/help-desk'
-import { toast } from 'react-hot-toast'
 
 const CustomInput: React.ForwardRefExoticComponent<RefAttributes<any>> | any = forwardRef((props, ref) => {
   return <TextField fullWidth {...props} inputRef={ref} autoComplete='off' />
@@ -44,7 +43,7 @@ const CustomInput: React.ForwardRefExoticComponent<RefAttributes<any>> | any = f
 
 const defaultValues = {
   title: '',
-  assign: '',
+  assign: [],
   priority: '',
   incident: '',
   startDate: '',
@@ -74,11 +73,11 @@ const FormLayoutsSeparator = () => {
       url: url,
       token: token,
       title: data.title,
-      assign: data.assign,
+      assign_to: [...data.assign],
       priority: data.priority,
-      incident: data.incident,
-      startDate: data.startDate,
-      endDate: data.endDate,
+      incident_type: data.incident,
+      start_date: data.startDate,
+      end_date: data.endDate,
       overview: data.overview
     }
 
@@ -86,8 +85,7 @@ const FormLayoutsSeparator = () => {
       .unwrap()
       .then(originalPromiseResult => {
         console.log(originalPromiseResult)
-
-        // toast.success(originalPromiseResult.status);
+        toast.success(originalPromiseResult.message)
       })
       .catch(rejectedValueorSerializedError => {
         {
@@ -181,10 +179,10 @@ const FormLayoutsSeparator = () => {
                       onChange={onChange}
                       value={value}
                     >
-                      <MenuItem value='UK'>UK</MenuItem>
-                      <MenuItem value='USA'>USA</MenuItem>
-                      <MenuItem value='Australia'>Australia</MenuItem>
-                      <MenuItem value='Germany'>Germany</MenuItem>
+                      <MenuItem value='support'>Basic Support</MenuItem>
+                      <MenuItem value='projects'>Software Projects</MenuItem>
+                      <MenuItem value='architecture'>Solution Architecture</MenuItem>
+                      <MenuItem value='certification'>Certifications</MenuItem>
                     </Select>
                   )}
                 />
