@@ -31,6 +31,9 @@ import DialogContent from '@mui/material/DialogContent'
 import TableContainer from '@mui/material/TableContainer'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
+// ** Third Party Imports
+import { useForm, Controller } from 'react-hook-form'
+
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 
@@ -106,12 +109,22 @@ const rolesArr: string[] = [
   'Payroll'
 ]
 
+const defaultValues = {
+  name: '',
+  description: ''
+}
+
 const RolesCards = () => {
   // ** States
   const [open, setOpen] = useState<boolean>(false)
   const [dialogTitle, setDialogTitle] = useState<'Add' | 'Edit'>('Add')
   const [selectedCheckbox, setSelectedCheckbox] = useState<string[]>([])
   const [isIndeterminateCheckbox, setIsIndeterminateCheckbox] = useState<boolean>(false)
+
+  const { control, handleSubmit } = useForm({
+    defaultValues,
+    mode: 'onChange'
+  })
 
   // ** Hook
   const theme = useTheme()
@@ -120,8 +133,6 @@ const RolesCards = () => {
 
   const handleClose = () => {
     setOpen(false)
-    setSelectedCheckbox([])
-    setIsIndeterminateCheckbox(false)
   }
 
   const togglePermission = (id: string) => {
@@ -155,6 +166,37 @@ const RolesCards = () => {
       setIsIndeterminateCheckbox(false)
     }
   }, [selectedCheckbox])
+
+  const onSubmit = (data: any) => {
+    console.log(data)
+
+    setSelectedCheckbox([])
+    setIsIndeterminateCheckbox(false)
+
+    // const url = '/permission'
+
+    // const formData = {
+    //   url: url,
+    //   token: token,
+    //   permission: data.name,
+    //   permission_description: data.description
+    // }
+
+    // dispatch(postAsyncPermissions(formData))
+    //   .unwrap()
+    //   .then(originalPromiseResult => {
+    //     toast.success(originalPromiseResult.message)
+    //     setOpen(false)
+    //   })
+    //   .catch(rejectedValueorSerializedError => {
+    //     {
+    //       rejectedValueorSerializedError && toast.error(rejectedValueorSerializedError.message)
+    //       setOpen(false)
+    //     }
+    //   })
+  }
+
+  console.log(selectedCheckbox)
 
   const renderCards = () =>
     cardData.map((item, index: number) => (
@@ -264,128 +306,142 @@ const RolesCards = () => {
             px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`]
           }}
         >
-          <Box sx={{ my: 4 }}>
-            <FormControl fullWidth>
-              <TextField label='Role Name' placeholder='Enter Role Name' />
-            </FormControl>
-          </Box>
-          <Typography variant='h6'>Role Permissions</Typography>
-          <TableContainer>
-            <Table size='small'>
-              <TableHead>
-                <TableRow>
-                  <TableCell sx={{ pl: '0 !important' }}>
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        fontSize: '0.875rem',
-                        whiteSpace: 'nowrap',
-                        alignItems: 'center',
-                        textTransform: 'capitalize',
-                        '& svg': { ml: 1, cursor: 'pointer' }
-                      }}
-                    >
-                      Administrator Access
-                      <Tooltip placement='top' title='Allows a full access to the system'>
-                        <Box sx={{ ml: 1, display: 'flex', color: 'text.secondary' }}>
-                          <Icon icon='bx:info-circle' fontSize='1rem' />
-                        </Box>
-                      </Tooltip>
-                    </Box>
-                  </TableCell>
-                  <TableCell colSpan={3}>
-                    <FormControlLabel
-                      label='Select All'
-                      sx={{ '& .MuiTypography-root': { textTransform: 'capitalize' } }}
-                      control={
-                        <Checkbox
-                          onChange={handleSelectAllCheckbox}
-                          indeterminate={isIndeterminateCheckbox}
-                          checked={selectedCheckbox.length === rolesArr.length * 3}
-                        />
-                      }
+          <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
+            <Box sx={{ my: 4 }}>
+              <FormControl fullWidth>
+                <Controller
+                  name='name'
+                  control={control}
+                  render={({ field: { value, onChange, onBlur } }) => (
+                    <TextField
+                      label='Role Name'
+                      placeholder='Enter Role Name'
+                      value={value}
+                      onBlur={onBlur}
+                      onChange={onChange}
                     />
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rolesArr.map((i: string, index: number) => {
-                  const id = i.toLowerCase().split(' ').join('-')
-
-                  return (
-                    <TableRow key={index} sx={{ '& .MuiTableCell-root:first-of-type': { pl: '0 !important' } }}>
-                      <TableCell
+                  )}
+                />
+              </FormControl>
+            </Box>
+            <Typography variant='h6'>Role Permissions</Typography>
+            <TableContainer>
+              <Table size='small'>
+                <TableHead>
+                  <TableRow>
+                    <TableCell sx={{ pl: '0 !important' }}>
+                      <Box
                         sx={{
-                          fontWeight: 600,
+                          display: 'flex',
+                          fontSize: '0.875rem',
                           whiteSpace: 'nowrap',
-                          color: `${theme.palette.text.primary} !important`
+                          alignItems: 'center',
+                          textTransform: 'capitalize',
+                          '& svg': { ml: 1, cursor: 'pointer' }
                         }}
                       >
-                        {i}
-                      </TableCell>
-                      <TableCell>
-                        <FormControlLabel
-                          label='Read'
-                          sx={{ my: -1 }}
-                          control={
-                            <Checkbox
-                              id={`${id}-read`}
-                              onChange={() => togglePermission(`${id}-read`)}
-                              checked={selectedCheckbox.includes(`${id}-read`)}
-                            />
-                          }
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <FormControlLabel
-                          label='Write'
-                          sx={{ my: -1 }}
-                          control={
-                            <Checkbox
-                              id={`${id}-write`}
-                              onChange={() => togglePermission(`${id}-write`)}
-                              checked={selectedCheckbox.includes(`${id}-write`)}
-                            />
-                          }
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <FormControlLabel
-                          label='Create'
-                          sx={{ my: -1 }}
-                          control={
-                            <Checkbox
-                              id={`${id}-create`}
-                              onChange={() => togglePermission(`${id}-create`)}
-                              checked={selectedCheckbox.includes(`${id}-create`)}
-                            />
-                          }
-                        />
-                      </TableCell>
-                    </TableRow>
-                  )
-                })}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                        Administrator Access
+                        <Tooltip placement='top' title='Allows a full access to the system'>
+                          <Box sx={{ ml: 1, display: 'flex', color: 'text.secondary' }}>
+                            <Icon icon='bx:info-circle' fontSize='1rem' />
+                          </Box>
+                        </Tooltip>
+                      </Box>
+                    </TableCell>
+                    <TableCell colSpan={3}>
+                      <FormControlLabel
+                        label='Select All'
+                        sx={{ '& .MuiTypography-root': { textTransform: 'capitalize' } }}
+                        control={
+                          <Checkbox
+                            onChange={handleSelectAllCheckbox}
+                            indeterminate={isIndeterminateCheckbox}
+                            checked={selectedCheckbox.length === rolesArr.length * 3}
+                          />
+                        }
+                      />
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rolesArr.map((i: string, index: number) => {
+                    const id = i.toLowerCase().split(' ').join('-')
+
+                    return (
+                      <TableRow key={index} sx={{ '& .MuiTableCell-root:first-of-type': { pl: '0 !important' } }}>
+                        <TableCell
+                          sx={{
+                            fontWeight: 600,
+                            whiteSpace: 'nowrap',
+                            color: `${theme.palette.text.primary} !important`
+                          }}
+                        >
+                          {i}
+                        </TableCell>
+                        <TableCell>
+                          <FormControlLabel
+                            label='Read'
+                            sx={{ my: -1 }}
+                            control={
+                              <Checkbox
+                                id={`${id}-read`}
+                                onChange={() => togglePermission(`${id}-read`)}
+                                checked={selectedCheckbox.includes(`${id}-read`)}
+                              />
+                            }
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <FormControlLabel
+                            label='Write'
+                            sx={{ my: -1 }}
+                            control={
+                              <Checkbox
+                                id={`${id}-write`}
+                                onChange={() => togglePermission(`${id}-write`)}
+                                checked={selectedCheckbox.includes(`${id}-write`)}
+                              />
+                            }
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <FormControlLabel
+                            label='Create'
+                            sx={{ my: -1 }}
+                            control={
+                              <Checkbox
+                                id={`${id}-create`}
+                                onChange={() => togglePermission(`${id}-create`)}
+                                checked={selectedCheckbox.includes(`${id}-create`)}
+                              />
+                            }
+                          />
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <DialogActions
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+                pb: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+              }}
+            >
+              <Box className='demo-space-x'>
+                <Button size='large' type='submit' variant='contained' onClick={handleClose}>
+                  Submit
+                </Button>
+                <Button size='large' color='secondary' variant='outlined' onClick={handleClose}>
+                  Cancel
+                </Button>
+              </Box>
+            </DialogActions>
+          </form>
         </DialogContent>
-        <DialogActions
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
-            pb: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
-          }}
-        >
-          <Box className='demo-space-x'>
-            <Button size='large' type='submit' variant='contained' onClick={handleClose}>
-              Submit
-            </Button>
-            <Button size='large' color='secondary' variant='outlined' onClick={handleClose}>
-              Cancel
-            </Button>
-          </Box>
-        </DialogActions>
       </Dialog>
     </Grid>
   )

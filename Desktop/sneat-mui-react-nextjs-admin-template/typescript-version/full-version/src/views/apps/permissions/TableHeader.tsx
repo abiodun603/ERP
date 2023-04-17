@@ -1,5 +1,5 @@
 // ** React Imports
-import { FormEvent, useState } from 'react'
+import { useState } from 'react'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
@@ -12,9 +12,24 @@ import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
+// ** Third Party Imports
+import { useForm, Controller } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
+
+// ** Hooks
+import { useAuth } from 'src/hooks/useAuth'
+import { postAsyncPermissions } from 'src/store/apps/permissions'
+import { AppDispatch } from 'src/store'
+import { useDispatch } from 'react-redux'
+
 interface TableHeaderProps {
   value: string
   handleFilter: (val: string) => void
+}
+
+const defaultValues = {
+  name: '',
+  description: ''
 }
 
 const TableHeader = (props: TableHeaderProps) => {
@@ -24,11 +39,40 @@ const TableHeader = (props: TableHeaderProps) => {
   // ** State
   const [open, setOpen] = useState<boolean>(false)
 
+  // ** Hooks
+  const auth = useAuth()
+  const dispatch = useDispatch<AppDispatch>()
+
+  const token = auth.token
   const handleDialogToggle = () => setOpen(!open)
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    setOpen(false)
-    e.preventDefault()
+  const { control, handleSubmit } = useForm({
+    defaultValues,
+    mode: 'onChange'
+  })
+
+  const onSubmit = (data: any) => {
+    const url = '/permission'
+
+    const formData = {
+      url: url,
+      token: token,
+      permission: data.name,
+      permission_description: data.description
+    }
+
+    dispatch(postAsyncPermissions(formData))
+      .unwrap()
+      .then(originalPromiseResult => {
+        toast.success(originalPromiseResult.message)
+        setOpen(false)
+      })
+      .catch(rejectedValueorSerializedError => {
+        {
+          rejectedValueorSerializedError && toast.error(rejectedValueorSerializedError.message)
+          setOpen(false)
+        }
+      })
   }
 
   return (
@@ -54,7 +98,7 @@ const TableHeader = (props: TableHeaderProps) => {
           />
         </Box>
         <Button sx={{ mb: 2 }} variant='contained' onClick={handleDialogToggle}>
-          Create Ticket
+          Create Permission
         </Button>
       </Box>
       <Dialog
@@ -73,31 +117,60 @@ const TableHeader = (props: TableHeaderProps) => {
         </DialogTitle>
         <DialogContent sx={{ pb: 18, px: 18 }}>
           <Typography sx={{ color: 'text.secondary' }}>Permissions you may use and assign to your users.</Typography>
-          <Box
-            component='form'
-            onSubmit={e => onSubmit(e)}
-            sx={{
-              mt: 7,
-              mx: 'auto',
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              flexDirection: 'column'
-            }}
-          >
-            <TextField fullWidth sx={{ mb: 4 }} label='Permission Name' placeholder='Enter Permission Name' />
-            <Box sx={{ width: '100%', display: 'flex' }}>
-              <FormControlLabel control={<Checkbox />} label='Set as core permission' />
+          <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
+            <Box
+              sx={{
+                mt: 7,
+                mx: 'auto',
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: 'column'
+              }}
+            >
+              <Controller
+                name='name'
+                control={control}
+                render={({ field: { value, onChange, onBlur } }) => (
+                  <TextField
+                    fullWidth
+                    sx={{ mb: 4 }}
+                    label='Permission Name'
+                    placeholder='Enter Permission Name'
+                    value={value}
+                    onBlur={onBlur}
+                    onChange={onChange}
+                  />
+                )}
+              />
+              <Box sx={{ width: '100%', display: 'flex' }}>
+                <FormControlLabel control={<Checkbox />} label='Set as core permission' />
+              </Box>
+              <Controller
+                name='description'
+                control={control}
+                render={({ field: { value, onChange, onBlur } }) => (
+                  <TextField
+                    fullWidth
+                    sx={{ mb: 4 }}
+                    label='Permission Description'
+                    placeholder='Enter Permission Name'
+                    value={value}
+                    onBlur={onBlur}
+                    onChange={onChange}
+                  />
+                )}
+              />
+              <Box className='demo-space-x' sx={{ '& > :last-child': { mr: '0 !important' } }}>
+                <Button size='large' type='submit' variant='contained' sx={{ mr: 5 }}>
+                  Create Permission
+                </Button>
+                <Button type='reset' size='large' variant='outlined' color='secondary' onClick={handleDialogToggle}>
+                  Discard
+                </Button>
+              </Box>
             </Box>
-            <Box className='demo-space-x' sx={{ '& > :last-child': { mr: '0 !important' } }}>
-              <Button size='large' type='submit' variant='contained' sx={{ mr: 5 }}>
-                Create Permission
-              </Button>
-              <Button type='reset' size='large' variant='outlined' color='secondary' onClick={handleDialogToggle}>
-                Discard
-              </Button>
-            </Box>
-          </Box>
+          </form>
         </DialogContent>
       </Dialog>
     </>

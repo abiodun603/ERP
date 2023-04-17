@@ -12,11 +12,13 @@ import authConfig from 'src/configs/auth'
 
 // ** Types
 import { AuthValuesType, LoginParams, ErrCallbackType, UserDataType } from './types'
+import { Token } from 'prismjs'
 
 // ** Defaults
 const defaultProvider: AuthValuesType = {
   user: null,
   loading: true,
+  token: '',
   setUser: () => null,
   setLoading: () => Boolean,
   login: () => Promise.resolve(),
@@ -33,6 +35,7 @@ const AuthProvider = ({ children }: Props) => {
   // ** States
   const [user, setUser] = useState<UserDataType | null>(defaultProvider.user)
   const [loading, setLoading] = useState<boolean>(defaultProvider.loading)
+  const [token, setToken] = useState('')
   console.log(user)
 
   // ** Hooks
@@ -49,7 +52,8 @@ const AuthProvider = ({ children }: Props) => {
 
         setLoading(false)
         setUser(userData)
-        console.log(user)
+        setToken(storedToken)
+        console.log(user, Token)
       } else {
         localStorage.removeItem('userData')
         localStorage.removeItem('refreshToken')
@@ -110,6 +114,7 @@ const AuthProvider = ({ children }: Props) => {
     loading,
     setUser,
     setLoading,
+    token,
     login: handleLog,
     logout: handleLogout
   }

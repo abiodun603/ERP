@@ -27,10 +27,16 @@ import DatePicker from 'react-datepicker'
 
 // ** Third Party Imports
 // import * as yup from 'yup'
-
 import { useForm, Controller } from 'react-hook-form'
 
 // import { yupResolver } from '@hookform/resolvers/yup'
+
+// ** Hooks
+import { useAuth } from 'src/hooks/useAuth'
+import { AppDispatch } from 'src/store'
+import { useDispatch } from 'react-redux'
+import { postAsyncHelpDesk } from 'src/store/apps/help-desk'
+import { toast } from 'react-hot-toast'
 
 const CustomInput: React.ForwardRefExoticComponent<RefAttributes<any>> | any = forwardRef((props, ref) => {
   return <TextField fullWidth {...props} inputRef={ref} autoComplete='off' />
@@ -48,15 +54,46 @@ const defaultValues = {
 
 const FormLayoutsSeparator = () => {
   // ** States
-  // const [date, setDate] = useState<DateType>(null)
-
   const { control, handleSubmit } = useForm({
     defaultValues,
     mode: 'onChange'
   })
 
+  // ** Hooks
+  const auth = useAuth()
+  const dispatch = useDispatch<AppDispatch>()
+
+  const token = auth.token
+
+  console.log(token)
+
   const onSubmit = (data: any) => {
-    console.log(data)
+    const url = '/ticket/helpdesk/create'
+
+    const formData = {
+      url: url,
+      token: token,
+      title: data.title,
+      assign: data.assign,
+      priority: data.priority,
+      incident: data.incident,
+      startDate: data.startDate,
+      endDate: data.endDate,
+      overview: data.overview
+    }
+
+    dispatch(postAsyncHelpDesk(formData))
+      .unwrap()
+      .then(originalPromiseResult => {
+        console.log(originalPromiseResult)
+
+        // toast.success(originalPromiseResult.status);
+      })
+      .catch(rejectedValueorSerializedError => {
+        {
+          rejectedValueorSerializedError && toast.error(rejectedValueorSerializedError.message)
+        }
+      })
   }
 
   return (
@@ -115,10 +152,9 @@ const FormLayoutsSeparator = () => {
                       onChange={onChange}
                       value={value}
                     >
-                      <MenuItem value='UK'>UK</MenuItem>
-                      <MenuItem value='USA'>USA</MenuItem>
-                      <MenuItem value='Australia'>Australia</MenuItem>
-                      <MenuItem value='Germany'>Germany</MenuItem>
+                      <MenuItem value='low'>LOW</MenuItem>
+                      <MenuItem value='medium'>MEDIUM</MenuItem>
+                      <MenuItem value='high'>HIGH</MenuItem>
                     </Select>
                   )}
                 />

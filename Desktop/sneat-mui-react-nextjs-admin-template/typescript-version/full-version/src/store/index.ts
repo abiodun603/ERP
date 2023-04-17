@@ -1,25 +1,31 @@
 // ** Toolkit imports
-import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
 // ** Reducers
-import chat from 'src/store/apps/chat'
-import user from 'src/store/apps/user'
-import email from 'src/store/apps/email'
-import invoice from 'src/store/apps/invoice'
-import calendar from 'src/store/apps/calendar'
-import permissions from 'src/store/apps/permissions'
-import tickets from 'src/store/apps/tickets'
+import chatReducer from 'src/store/apps/chat'
+import userReducer from 'src/store/apps/user'
+import emailReducer from 'src/store/apps/email'
+import invoiceReducer from 'src/store/apps/invoice'
+import calendarReducer from 'src/store/apps/calendar'
+import permissionReducer from 'src/store/apps/permission'
+import ticketsReducer from 'src/store/apps/tickets'
+import helpDeskReducer from 'src/store/apps/help-desk'
+import permissionsReducer from 'src/store/apps/permissions'
+
+const rootReducer = combineReducers({
+  user: userReducer,
+  chat: chatReducer,
+  email: emailReducer,
+  invoice: invoiceReducer,
+  calendar: calendarReducer,
+  permission: permissionReducer,
+  permissions: permissionsReducer,
+  tickets: ticketsReducer,
+  helpdesk: helpDeskReducer
+})
 
 export const store = configureStore({
-  reducer: {
-    user,
-    chat,
-    email,
-    invoice,
-    calendar,
-    permissions,
-    tickets
-  },
+  reducer: rootReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false

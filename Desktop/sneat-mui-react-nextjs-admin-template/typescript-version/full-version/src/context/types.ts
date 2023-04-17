@@ -18,6 +18,7 @@ export type UserDataType = {
 
 export type AuthValuesType = {
   loading: boolean
+  token: string
   logout: () => void
   user: UserDataType | null
   setLoading: (value: boolean) => void

@@ -16,16 +16,16 @@ interface MyKnownError {
   errorMessage: string
 }
 
-export const fetchAsyncTickets = createAsyncThunk<
+export const postAsyncHelpDesk = createAsyncThunk<
   MyData,
   { url: string } & Partial<UserAttributes>,
   {
     rejectValue: MyKnownError
   }
->('tickets/fetchAsyncThunk', async (userInfo, { rejectWithValue }) => {
+>('helpDesk/postAsyncThunk', async (userInfo, { rejectWithValue }) => {
   const { url, token } = userInfo
   try {
-    const response = await axios.get(config.baseUrl + url, {
+    const response = await axios.post(config.baseUrl + url, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
@@ -46,7 +46,7 @@ export const fetchAsyncTickets = createAsyncThunk<
   }
 })
 
-export interface ITickets {
+export interface IHelp {
   data: any[] | null
   loading: string
   error: null | string
@@ -56,22 +56,22 @@ const initialState = {
   data: null,
   loading: 'IDLE',
   error: ''
-} as ITickets
+} as IHelp
 
-const EventSlice = createSlice({
-  name: 'ticke',
+const HelpDeskSlice = createSlice({
+  name: 'helpdesk',
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(fetchAsyncTickets.pending, state => {
+    builder.addCase(postAsyncHelpDesk.pending, state => {
       // The type signature on action.payload matches what we passed into the generic for `normalize`, allowing us to access specific properties on `payload.articles` if desired
       state.loading = HTTP_STATUS.PENDING
     })
-    builder.addCase(fetchAsyncTickets.fulfilled, (state, { payload }) => {
+    builder.addCase(postAsyncHelpDesk.fulfilled, (state, { payload }) => {
       state.loading = HTTP_STATUS.FULFILLED
       state.data = payload.data
     })
-    builder.addCase(fetchAsyncTickets.rejected, (state, action: PayloadAction<any>) => {
+    builder.addCase(postAsyncHelpDesk.rejected, (state, action: PayloadAction<any>) => {
       if (action.payload) {
         // Since we passed in `MyKnownError` to `rejectValue` in `updateUser`, the type information will be available here.
         state.error = action.payload.errorMessage
@@ -84,4 +84,4 @@ const EventSlice = createSlice({
 
 // export const getBomLoading = (state) => state.bom?.loading;
 // export const getBomData = (state) => state?.bom?.data?.data;
-export default EventSlice.reducer
+export default HelpDeskSlice.reducer

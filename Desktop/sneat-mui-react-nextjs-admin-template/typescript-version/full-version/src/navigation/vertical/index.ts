@@ -139,9 +139,13 @@ const navigation = (): VerticalNavItemsType => {
       ]
     },
     {
-      title: 'Roles & Permissions',
+      title: 'Account Management',
       icon: 'bx:check-shield',
       children: [
+        {
+          title: 'User',
+          path: '/apps/user'
+        },
         {
           title: 'Roles',
           path: '/apps/roles'

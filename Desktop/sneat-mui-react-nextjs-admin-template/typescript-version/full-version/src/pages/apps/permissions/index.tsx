@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState, useEffect, useCallback, FormEvent } from 'react'
+import { useState, useEffect, useCallback, FormEvent, useMemo } from 'react'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
@@ -34,11 +34,12 @@ import TableHeader from 'src/views/apps/permissions/TableHeader'
 import { RootState, AppDispatch } from 'src/store'
 import { PermissionRowType } from 'src/types/apps/permissionTypes'
 
-// ** Actions Imports
-import { fetchData } from 'src/store/apps/permissions'
-
 // ** Types
 import { ThemeColor } from 'src/@core/layouts/types'
+
+// ** Hooks
+import { useAuth } from 'src/hooks/useAuth'
+import { fetchAsyncPermissions } from 'src/store/apps/permissions'
 
 interface Colors {
   [key: string]: ThemeColor
@@ -100,16 +101,28 @@ const PermissionsTable = () => {
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
 
   // ** Hooks
+  const auth = useAuth()
   const dispatch = useDispatch<AppDispatch>()
   const store = useSelector((state: RootState) => state.permissions)
 
+  const token = auth.token
+
+  const url = '/permission'
+
+  const userInfos = {
+    url: url,
+    token: token
+  }
+
+  const userInfo = useMemo(() => userInfos, [])
+
   useEffect(() => {
-    dispatch(
-      fetchData({
-        q: value
+    dispatch(fetchAsyncPermissions(userInfo))
+      .unwrap()
+      .then(originalPromiseResult => {
+        console.log(originalPromiseResult)
       })
-    )
-  }, [dispatch, value])
+  }, [dispatch, userInfo])
 
   const handleFilter = useCallback((val: string) => {
     setValue(val)
@@ -164,7 +177,7 @@ const PermissionsTable = () => {
         <Grid item xs={12}>
           <Card>
             <TableHeader value={value} handleFilter={handleFilter} />
-            <DataGrid
+            {/* <DataGrid
               autoHeight
               rows={store.data}
               columns={columns}
@@ -172,7 +185,7 @@ const PermissionsTable = () => {
               pageSizeOptions={[10, 25, 50]}
               paginationModel={paginationModel}
               onPaginationModelChange={setPaginationModel}
-            />
+            /> */}
           </Card>
         </Grid>
       </Grid>
