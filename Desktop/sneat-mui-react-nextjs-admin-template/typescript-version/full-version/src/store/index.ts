@@ -11,6 +11,7 @@ import permissionReducer from 'src/store/apps/permission'
 import ticketsReducer from 'src/store/apps/tickets'
 import helpDeskReducer from 'src/store/apps/help-desk'
 import permissionsReducer from 'src/store/apps/permissions'
+import supportReducer from 'src/store/apps/support-ticket'
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
   permission: permissionReducer,
   permissions: permissionsReducer,
   tickets: ticketsReducer,
-  helpdesk: helpDeskReducer
+  helpdesk: helpDeskReducer,
+  support: supportReducer
 })
 
 export const store = configureStore({

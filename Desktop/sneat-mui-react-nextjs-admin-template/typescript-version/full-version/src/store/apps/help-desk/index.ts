@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 import config from 'src/configs/config'
 import { HTTP_STATUS } from 'src/constants'
+import { RootState } from 'src/store'
 
 interface MyData {
   message: string
@@ -83,6 +84,7 @@ const HelpDeskSlice = createSlice({
   }
 })
 
-// export const getBomLoading = (state) => state.bom?.loading;
+export const getHelpDeskLoading = (state: RootState) => state.helpdesk?.loading
+
 // export const getBomData = (state) => state?.bom?.data?.data;
 export default HelpDeskSlice.reducer

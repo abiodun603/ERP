@@ -35,7 +35,10 @@ import { useForm, Controller } from 'react-hook-form'
 import { useAuth } from 'src/hooks/useAuth'
 import { AppDispatch } from 'src/store'
 import { useDispatch } from 'react-redux'
-import { postAsyncHelpDesk } from 'src/store/apps/help-desk'
+import { getHelpDeskLoading, postAsyncHelpDesk } from 'src/store/apps/help-desk'
+import { useAppSelector } from 'src/hooks/useTypedSelector'
+import { HTTP_STATUS } from 'src/constants'
+import { ThreeDots } from 'react-loading-icons'
 
 const CustomInput: React.ForwardRefExoticComponent<RefAttributes<any>> | any = forwardRef((props, ref) => {
   return <TextField fullWidth {...props} inputRef={ref} autoComplete='off' />
@@ -53,7 +56,7 @@ const defaultValues = {
 
 const FormLayoutsSeparator = () => {
   // ** States
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     defaultValues,
     mode: 'onChange'
   })
@@ -61,6 +64,8 @@ const FormLayoutsSeparator = () => {
   // ** Hooks
   const auth = useAuth()
   const dispatch = useDispatch<AppDispatch>()
+
+  const loading = useAppSelector(getHelpDeskLoading)
 
   const token = auth.token
 
@@ -86,10 +91,14 @@ const FormLayoutsSeparator = () => {
       .then(originalPromiseResult => {
         console.log(originalPromiseResult)
         toast.success(originalPromiseResult.message)
+
+        reset()
       })
       .catch(rejectedValueorSerializedError => {
         {
           rejectedValueorSerializedError && toast.error(rejectedValueorSerializedError.message)
+
+          reset()
         }
       })
   }
@@ -253,7 +262,7 @@ const FormLayoutsSeparator = () => {
         </CardContent>
         <CardActions sx={{ display: 'flex', justifyContent: 'end' }}>
           <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-            Submit
+            {loading === HTTP_STATUS.PENDING ? <ThreeDots width={40} className='loading-circle' /> : 'Submit'}
           </Button>
         </CardActions>
       </form>

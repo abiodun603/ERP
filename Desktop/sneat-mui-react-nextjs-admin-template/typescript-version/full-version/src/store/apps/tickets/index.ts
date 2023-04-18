@@ -58,7 +58,7 @@ const initialState = {
   error: ''
 } as ITickets
 
-const EventSlice = createSlice({
+const TicketsSlice = createSlice({
   name: 'ticke',
   initialState,
   reducers: {},
@@ -84,4 +84,4 @@ const EventSlice = createSlice({
 
 // export const getBomLoading = (state) => state.bom?.loading;
 // export const getBomData = (state) => state?.bom?.data?.data;
-export default EventSlice.reducer
+export default TicketsSlice.reducer

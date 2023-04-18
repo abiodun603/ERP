@@ -24,7 +24,7 @@ const FormLayouts = () => {
           <FormLayoutsIcons />
         </Grid>
         <Grid item xs={12}>
-          {/* <FormLayoutsSeparator /> */}
+          <FormLayoutsSeparator />
         </Grid>
         <Grid item xs={12} sx={{ pt: theme => `${theme.spacing(8)} !important` }}>
           <Typography variant='h6'>Form with Tabs</Typography>

@@ -21,23 +21,23 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 // ** Icon Imports
 
 // ** Store Imports
-import { useDispatch } from 'react-redux'
 
 // ** Custom Components Imports
 import CustomChip from 'src/@core/components/mui/chip'
 import PageHeader from 'src/@core/components/page-header'
 import TableHeader from 'src/views/apps/permissions/TableHeader'
 
-// ** Types Imports
-import { AppDispatch } from 'src/store'
-
 // ** Actions Imports
 
 // ** Types
 import { ThemeColor } from 'src/@core/layouts/types'
-import { fetchData } from 'src/store/apps/tickets'
 import { TicketRowType } from 'src/types/apps/ticketTypes'
 import data from 'src/@fake-db/apps/tickets'
+import { useAppDispatch } from 'src/hooks/useTypedSelector'
+import { fetchAsyncTickets } from 'src/store/apps/tickets'
+
+// ** Hooks
+import { useAuth } from 'src/hooks/useAuth'
 
 interface Colors {
   [key: string]: ThemeColor
@@ -147,17 +147,30 @@ const PermissionsTable = () => {
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
 
   // ** Hooks
-  const dispatch = useDispatch<AppDispatch>()
+  const dispatch = useAppDispatch()
+  const auth = useAuth()
+
+  // ** Token
+  const token = auth.token
 
   // const store = useSelector((state: RootState) => state.permissions)
+  const url = '/ticket/support/create'
+  const userInfo = {
+    url: url,
+    token: token
+  }
 
   useEffect(() => {
-    dispatch(
-      fetchData({
-        q: value
+    dispatch(fetchAsyncTickets(userInfo))
+      .unwrap()
+      .then(originalPromiseResult => {
+        console.log(originalPromiseResult)
+
+        // if (originalPromiseResult?.status === "SUCCESS") {
+        //   navigate("OtpScreen")
+        // }
       })
-    )
-  }, [dispatch, value])
+  }, [dispatch, token])
 
   const handleFilter = useCallback((val: string) => {
     setValue(val)
